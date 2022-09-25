@@ -5,7 +5,7 @@ const Timer = () => {
     let intervalMs = Math.floor(1000 / updatesPerSecond);
     
     const [{msElapsed, secondsElapsed, minutesElapsed}, setTimeElapsed] = useState({msElapsed: 0, secondsElapsed: 0, minutesElapsed: 0})
-    const [isPaused, setIsPaused] = useState(false);
+    const [isPaused, setIsPaused] = useState(true);
     
     const handleControlClick = (ev) => {
         setIsPaused(!isPaused);
