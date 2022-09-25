@@ -3,6 +3,7 @@ import 'normalize.css';
 import Counter from './components/Counter';
 import Navbar from './components/Navbar';
 import Timer from './components/Timer';
+import Todo from './components/Todo'
 
 const App = () => {
   return (
@@ -10,9 +11,12 @@ const App = () => {
     <div className="App">
       <Navbar></Navbar>
       <div className="content">
-        
-        <Counter></Counter>
-        <Timer></Timer>
+        <div className='flex-row'>
+          <Counter></Counter>
+          <Timer></Timer>
+        </div>
+        <Todo></Todo>
+
       </div>
     </div>
 

@@ -4,8 +4,7 @@ const Timer = () => {
     let updatesPerSecond = 40;
     let intervalMs = Math.floor(1000 / updatesPerSecond);
     
-    const [msElapsed, setMsElapsed] = useState(0);
-    const [secondsElapsed, setSecondsElapsed] = useState(0);
+    const [{msElapsed, secondsElapsed, minutesElapsed}, setTimeElapsed] = useState({msElapsed: 0, secondsElapsed: 0, minutesElapsed: 0})
     const [isPaused, setIsPaused] = useState(false);
     
     const handleControlClick = (ev) => {
@@ -16,13 +15,11 @@ const Timer = () => {
         let interval = null;
         if (!isPaused){
             interval = setInterval(() => {
-                if (msElapsed + intervalMs >= 1000){
-                    setSecondsElapsed(secondsElapsed => secondsElapsed + 1);
-                    setMsElapsed(msElapsed => (msElapsed + intervalMs) % 1000);
-                }
-                else{
-                    setMsElapsed(msElapsed => msElapsed + intervalMs);
-                }
+                setTimeElapsed(d => ({
+                    msElapsed: (d.msElapsed + intervalMs >= 1000) ? (d.msElapsed + intervalMs - 1000) : (d.msElapsed + intervalMs),
+                    secondsElapsed: (d.msElapsed + intervalMs >= 1000) ? (d.secondsElapsed === 59 ? 0 : d.secondsElapsed + 1) : (d.secondsElapsed),
+                    minutesElapsed: ((d.msElapsed + intervalMs >= 1000) && (d.secondsElapsed === 59)) ? (d.minutesElapsed + 1) : (d.minutesElapsed)
+                }))
             }, intervalMs)
         }
         return () => {clearInterval(interval)};
@@ -31,16 +28,20 @@ const Timer = () => {
 
     return ( 
         <div className='flex-col'>
-            <div className='flex-row margin-small'>
-                <div className='flex-col margin-small'>
-                    <span>Seconds</span>
-                    <span>{secondsElapsed}</span>
-                </div>
-                <div className='flex-col margin-small'>
-                    <span>Milliseconds</span>
-                    <span>{msElapsed}</span>
-                </div>
+            <div style={{
+                fontSize: "2em"
+            }}>
+                <span>
+                    {`${minutesElapsed > 9 ? minutesElapsed : "0" + minutesElapsed}`}:
+                </span>
+                <span>
+                    {`${secondsElapsed > 9 ? secondsElapsed : "0" + secondsElapsed}`}:
+                </span>
+                <span>
+                    {`${msElapsed > 9 ? msElapsed : "0" + msElapsed}`}
+                </span>
             </div>
+            
             <Button variant='contained' onClick={handleControlClick}>{isPaused ? "Resume" : "Pause"}</Button>
         </div>
     );
