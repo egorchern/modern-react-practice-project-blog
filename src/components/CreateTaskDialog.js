@@ -17,7 +17,9 @@ const CreateTaskDialog = (props) => {
                     Please give a concise description of the task to do
                 </DialogContentText>
                 <TextField
-                    autoFocus
+                    autoFocus = {true}
+                    error = {taskDescriptionValue === "" ? true : false}
+                    helperText= {taskDescriptionValue === "" ? "Task description can't be left empty" : null}
                     margin="dense"
                     id="new_task_description"
                     label="Task description"
@@ -31,7 +33,11 @@ const CreateTaskDialog = (props) => {
             <DialogActions>
                 <Button onClick={props.handleClose}>Cancel</Button>
                 <Button onClick={() => {
-                    props.handleTaskCreate(taskDescriptionValue)
+                    if(taskDescriptionValue !== ""){
+                        setTaskDescriptionValue("");
+                        props.handleTaskCreate(taskDescriptionValue)
+                    }
+                    
                 }}>Create</Button>
             </DialogActions>
         </Dialog>
