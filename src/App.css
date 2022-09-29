@@ -44,15 +44,14 @@ nav a:hover{
 }
 
 .counter-increase, .counter-decrease{
-  color:hsla(0, 0%, 0%, 0.3);
-  font-size: 3em ;
-  padding: 0.1em;
-  margin: 0.2em;
+  color:hsla(0, 0%, 100%, 0.4);
+  font-size: 2em ;
+  margin: 0.1em;
   transition: color 0.2s ; 
   cursor: pointer;
 }
 .counter-count{
-  font-size: 3em;
+  font-size: 1.4em;
 }
 .counter-increase:hover{
   color: hsla(100, 97%, 46%, 1);
@@ -104,4 +103,14 @@ nav a:hover{
 .task-container{
   margin: 1em;
   position: relative;
+}
+.blog{
+  margin: 0.6em;
+  width: 100%;
+  padding: 0.15em 0.8em;
+  border-radius: 1em !important;
+  transition: all 0.3s !important;
+}
+.blog:hover{
+  background-color: hsla(0, 0%, 7%, 0.92)
 }

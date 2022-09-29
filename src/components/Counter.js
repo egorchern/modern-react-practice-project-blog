@@ -7,16 +7,12 @@ const Counter = () => {
         setCount(count + 1);
     }
     const handleDecreaseClick = (ev) => {
-        if (count > 0){
-            setCount(count - 1);
-        }
+        
+        setCount(count - 1);
+        
     }
     return ( 
-        <div className="flex-col" style={{margin: "1em"}}>
-            <span style= {{
-                fontSize: "1.5em",
-            }}>Reactive Counter
-            </span>
+        <div className="flex-col">
             <div className="flex-row">
                 <span className ="material-icons counter-increase" onClick={handleIncreaseClick}>
                     arrow_upward
