@@ -10,6 +10,10 @@ const Timer = () => {
     const handleControlClick = (ev) => {
         setIsPaused(!isPaused);
     }
+    const handleResetClick = (ev) => {
+        setTimeElapsed({msElapsed: 0, secondsElapsed: 0, minutesElapsed: 0})
+        setIsPaused(true)
+    }
     useEffect(() => {
         
         let interval = null;
@@ -28,6 +32,9 @@ const Timer = () => {
 
     return ( 
         <div className='flex-col'>
+            <h2>
+                Timer
+            </h2>
             <div style={{
                 fontSize: "2em"
             }}>
@@ -41,8 +48,12 @@ const Timer = () => {
                     {`${msElapsed > 9 ? msElapsed : "0" + msElapsed}`}
                 </span>
             </div>
-            
-            <Button variant='contained' onClick={handleControlClick}>{isPaused ? "Resume" : "Pause"}</Button>
+            <div className='flex-row margin-small-children'>
+                <Button variant='contained' onClick={handleControlClick}>{isPaused ? "Start" : "Pause"}</Button>
+                <Button variant="contained" onClick={handleResetClick}>Reset</Button>
+            </div>
+
+
         </div>
     );
 }
