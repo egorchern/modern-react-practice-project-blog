@@ -1,124 +1,145 @@
-html, body{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
-.todo-container{
-  width: 100%;
+.todo-container {
+    width: 100%;
 }
-.App{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.App {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .margin-small-children > * {
-  margin: 0.4em !important;
+    margin: 0.4em !important;
 }
-nav{
-  width:100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: hsla(213, 13%, 16%, 1);
-  color: white;
-  padding: 0.3em 0.6em;
+.padding-small {
+    padding: 0.3em;
 }
-.nav-heading-container{
-  display: flex;
-  flex-grow: 1;
+nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: hsla(213, 13%, 16%, 1);
+    color: white;
+    padding: 0.3em 0.6em;
 }
-.nav-heading{
-  font-size: 1.5em;
+.nav-heading-container {
+    display: flex;
+    flex-grow: 1;
 }
-nav a{
-  color: inherit;
-  text-decoration: none;
-  padding: 0.75em;
-  margin: 0.4em;
-  transition: background-color 0.3s;
-  border-radius: 0.4em;
+.nav-heading {
+    font-size: 1.5em;
 }
-.content > div{
-  width: 100%;
+nav a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0.75em;
+    margin: 0.4em;
+    transition: background-color 0.3s;
+    border-radius: 0.4em;
 }
-nav a:hover{
-  background-color: hsla(0, 0%, 100%, 0.2);
+.content > div {
+    width: 100%;
 }
-*{
-  box-sizing: border-box;
+nav a:hover {
+    background-color: hsla(0, 0%, 100%, 0.2);
+}
+* {
+    box-sizing: border-box;
 }
 
-.counter-increase, .counter-decrease{
-  color:hsla(0, 0%, 100%, 0.4);
-  font-size: 2em ;
-  margin: 0.1em;
-  transition: color 0.2s ; 
-  cursor: pointer;
+.counter-increase,
+.counter-decrease {
+    color: hsla(0, 0%, 100%, 0.4);
+    font-size: 2em;
+    margin: 0.1em;
+    transition: color 0.2s;
+    cursor: pointer;
 }
-.counter-count{
-  font-size: 1.4em;
+.counter-count {
+    font-size: 1.4em;
 }
-.counter-increase:hover{
-  color: hsla(100, 97%, 46%, 1);
+.counter-increase:hover {
+    color: hsla(100, 97%, 46%, 1);
 }
-.counter-decrease:hover{
-  color: red;
+.counter-decrease:hover {
+    color: red;
 }
-.material-icons{
-  user-select: none;
+.material-icons {
+    user-select: none;
 }
-.content{
-  width: 100%;
+.content {
+    width: 100%;
 }
-.flex-row{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+.flex-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
-.margin-small{
-  margin: 0.5em;
+.margin-small {
+    margin: 0.5em;
 }
-.flex-col{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.flex-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.task{
-  padding: 0.3em;
-  margin: 0.5em;
-  flex-grow: 1;
-  transition: transform 0.3s;
-  cursor: pointer;
+.task {
+    padding: 0.3em;
+    margin: 0.5em;
+    flex-grow: 1;
+    transition: transform 0.3s;
+    cursor: pointer;
 }
-.task-lineover{
-  width: 0;
-  margin: 0;
-  position: absolute;
-  left: 0;
-  background-color: hsla(0, 0%, 0%, 0.6);
-  transition: width 0.5s;
-  height: 2px;
+.task-lineover {
+    width: 0;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.6);
+    transition: width 0.5s;
+    height: 2px;
 }
-.task-lineover.active{
-  display: block;
-  width: 100%;
+.task-lineover.active {
+    display: block;
+    width: 100%;
 }
-.task-container{
-  margin: 1em;
-  position: relative;
+.task-container {
+    margin: 1em;
+    position: relative;
 }
-.blog{
-  margin: 0.6em;
-  width: 100%;
-  padding: 0.15em 0.8em;
-  border-radius: 1em !important;
-  transition: all 0.3s !important;
+.blog {
+    margin: 0.6em;
+    width: 100%;
+    padding: 0.15em 0.8em;
+    border-radius: 1em !important;
+    transition: all 0.3s !important;
+    height: 12vh !important;
+    min-height: 4em;
+    overflow: auto;
+    position: relative;
 }
-.blog:hover{
-  background-color: hsla(0, 0%, 7%, 0.92)
+.blog > a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-decoration: none; /* No underlines on the link */
+    z-index: 10; /* Places the link above everything else in the div */
+    background-color: #fff; /* Fix to make div clickable in IE */
+    opacity: 0; /* Fix to make div clickable in IE */
+    filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+}
+.blog:hover {
+    background-color: hsla(0, 0%, 7%, 0.92);
 }

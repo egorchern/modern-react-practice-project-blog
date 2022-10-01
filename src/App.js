@@ -1,10 +1,11 @@
 import "./App.css";
 import "normalize.css";
 import Navbar from "./components/Navbar";
-import Home from "./Home";
-import BlogList from "./components/BlogList";
+import Home from "./pages/Home";
+import BlogsPage from "./pages/BlogsPage";
 import {useState, useEffect} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import BlogDetails from "./pages/BlogDetails";
 
 const App = () => {
     return (
@@ -16,13 +17,18 @@ const App = () => {
                         <Route
                             path="/"
                             element={<Home />}
+                            exact
                         ></Route>
                         <Route
                             path="/blogs"
-                            element={
-                                <BlogList url={"http://localhost:8000/blogs"} />
-                            }
+                            element={<BlogsPage />}
+                            exact
                         ></Route>
+                        <Route path="/blogs/:id" exact element={
+                            <BlogDetails>
+
+                            </BlogDetails>
+                        }></Route>
                     </Routes>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import Blog from "./Blog";
+import BlogPreview from "./BlogPreview";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {Skeleton} from "@mui/material";
 import Pagination from "@mui/material/Pagination";
@@ -11,7 +11,13 @@ const BlogList = ({url}) => {
     const [currentBlogs, setCurrentBlogs] = useState(null);
     const [pageCount, setPageCount] = useState(0);
     const [pageNumber, setPageNumber] = useState(1);
-    const {data: blogs, dataLoaded: blogsLoaded, errorLoading} = useFetch(url);
+    const [curPageLoaded, setCurPageLoaded] = useState(false);
+    const simulaterPageLoadTime = 500;
+    const {
+        data: blogs,
+        dataLoaded: blogsLoaded,
+        errorLoading,
+    } = useFetch(url, 1000);
 
     useEffect(() => {
         setPageCount(Math.ceil(blogs.length / itemsPerPage));
@@ -21,6 +27,14 @@ const BlogList = ({url}) => {
                 pageNumber * itemsPerPage
             )
         );
+        setCurPageLoaded(false);
+        const pageLoadTm = setTimeout(() => {
+            setCurPageLoaded(true);
+        }, simulaterPageLoadTime);
+
+        return () => {
+            clearTimeout(pageLoadTm);
+        };
     }, [blogs, pageNumber]);
 
     const handlePageChange = (ev, value) => {
@@ -28,32 +42,47 @@ const BlogList = ({url}) => {
     };
 
     return (
-        <div className="flex-col blogs-container margin-small">
-            {errorLoading && (
-                <h2 style={{margin: "auto", textAlign: "center"}}>
-                    There was an error loading the blogs!
-                </h2>
-            )}
-            {!blogsLoaded && !errorLoading && (
-                <div>
-                    <h2 style={{margin: "auto", textAlign: "center"}}>
-                        Loading
-                    </h2>
-                </div>
-            )}
-            {blogsLoaded && !errorLoading && (
+        <div className="flex-col blogs-container padding-small">
+            {(() => {
+                if (errorLoading) {
+                    return (
+                        <h2 style={{margin: "auto", textAlign: "center"}}>
+                            There was an error loading the blogs!
+                        </h2>
+                    );
+                } else if (!curPageLoaded) {
+                    return Array.from({length: itemsPerPage}).map((item, index) => {
+                        
+                        return (
+                            <Skeleton
+                                variant="rectangular"
+                                className="blog"
+                                animation="wave"
+                                key = {index}
+                            ></Skeleton>
+                        );
+                    });
+                } else {
+                    return (
+                        <ThemeProvider theme={darkTheme}>
+                            {currentBlogs &&
+                                currentBlogs.map((blog, index) => {
+                                    return (
+                                        <BlogPreview
+                                            title={blog.title}
+                                            body={`${blog.body.slice(0, 70)} ...`}
+                                            author={blog.authorName}
+                                            id={blog.id}
+                                            key={blog.id}
+                                        ></BlogPreview>
+                                    );
+                                })}
+                        </ThemeProvider>
+                    );
+                }
+            })()}
+            {!errorLoading && (
                 <ThemeProvider theme={darkTheme}>
-                    {currentBlogs &&
-                        currentBlogs.map((blog, index) => {
-                            return (
-                                <Blog
-                                    title={blog.title}
-                                    body={blog.body}
-                                    author={blog.authorName}
-                                    key={blog.id}
-                                ></Blog>
-                            );
-                        })}
                     <Pagination
                         count={pageCount}
                         page={pageNumber}

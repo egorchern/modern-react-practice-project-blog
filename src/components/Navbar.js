@@ -1,4 +1,4 @@
-
+import {Link} from "react-router-dom"
 
 const Navbar = () => {
     return ( 
@@ -8,8 +8,12 @@ const Navbar = () => {
             </div>
             
             <ul>
-                <a href="/">Home</a>
-                <a href="/blogs">Blogs</a>
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/blogs">
+                    Blogs
+                </Link>
             </ul>
         </nav>
     );
