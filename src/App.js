@@ -6,13 +6,16 @@ import BlogsPage from "./pages/BlogsPage";
 import {useState, useEffect} from "react";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import BlogDetails from "./pages/BlogDetails";
+import CreateBlog from "./pages/CreateBlog";
+import NotFound from "./pages/NotFound";
+import { isClickableInput } from "@testing-library/user-event/dist/utils";
 
 const App = () => {
     return (
         <Router>
             <div className="App">
                 <Navbar></Navbar>
-                <div className="content">
+                <main className="content">
                     <Routes>
                         <Route
                             path="/"
@@ -29,8 +32,22 @@ const App = () => {
 
                             </BlogDetails>
                         }></Route>
+                        <Route path="/createBlog" exact element={
+                            <CreateBlog>
+
+                            </CreateBlog>
+                        }>
+
+                        </Route>
+                        <Route path="*" element={
+                            <NotFound>
+
+                            </NotFound>
+                        }>
+
+                        </Route>
                     </Routes>
-                </div>
+                </main>
             </div>
         </Router>
     );

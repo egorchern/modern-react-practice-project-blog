@@ -51,17 +51,18 @@ const BlogList = ({url}) => {
                         </h2>
                     );
                 } else if (!curPageLoaded) {
-                    return Array.from({length: itemsPerPage}).map((item, index) => {
-                        
-                        return (
-                            <Skeleton
-                                variant="rectangular"
-                                className="blog"
-                                animation="wave"
-                                key = {index}
-                            ></Skeleton>
-                        );
-                    });
+                    return Array.from({length: itemsPerPage}).map(
+                        (item, index) => {
+                            return (
+                                <Skeleton
+                                    variant="rectangular"
+                                    className="blog"
+                                    animation="wave"
+                                    key={index}
+                                ></Skeleton>
+                            );
+                        }
+                    );
                 } else {
                     return (
                         <ThemeProvider theme={darkTheme}>
@@ -70,7 +71,10 @@ const BlogList = ({url}) => {
                                     return (
                                         <BlogPreview
                                             title={blog.title}
-                                            body={`${blog.body.slice(0, 70)} ...`}
+                                            body={`${blog.body.slice(
+                                                0,
+                                                70
+                                            )} ...`}
                                             author={blog.authorName}
                                             id={blog.id}
                                             key={blog.id}
